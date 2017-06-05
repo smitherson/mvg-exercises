@@ -1,4 +1,4 @@
-#Multiple view geometry exercises.
+# Multiple view geometry exercises.
 
 
 For now - these are badly written solutions to exercises from this course.
