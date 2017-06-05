@@ -37,4 +37,4 @@
 #Vim
 *.swp
 *.vim
-tags
+*tags*
