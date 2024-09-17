@@ -1,5 +1,5 @@
 # cmake needs this line
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.12)
 
 # Define project name
 project(opencv_example_project)
@@ -50,30 +50,10 @@ message(STATUS "    include path: ${OpenCV_INCLUDE_DIRS}")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0 -fprofile-arcs -ftest-coverage")
 set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -g -O0 -fprofile-arcs -ftest-coverage")
 
-option(REPORT_COVERAGE            "Generate coverage report" ON)
 
-if(REPORT_COVERAGE)
-    if(NOT (CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX) AND (NOT "${CMAKE_C_COMPILER_ID}" STREQUAL "Clang"))
-        message(FATAL_ERROR "Coverage needs GCC compiler. The current compiler ${CMAKE_C_COMPILER_ID} is not GNU gcc!")
-    endif()
-
-    if(NOT CMAKE_BUILD_TYPE STREQUAL "DEBUG")
-        message(FATAL_ERROR "Coverage: Code coverage results with an optimised (non-Debug) build may be misleading! Add -DCMAKE_BUILD_TYPE=Debug")
-    endif()
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0 -fprofile-arcs -ftest-coverage")
-    set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -g -O0 -fprofile-arcs -ftest-coverage")
-endif(REPORT_COVERAGE)
-
-
-if(CMAKE_VERSION VERSION_LESS "2.8.11")
-  # Add OpenCV headers location to your include paths
-  include_directories(${OpenCV_INCLUDE_DIRS})
-endif()
 
 # Declare the executable target built from your sources
 add_executable(radial-distortion radial-distortion.cpp)
-#add_executable(3dto2d radial-distortion.cpp)
 
-# Link your application with OpenCV libraries
 target_link_libraries(radial-distortion ${OpenCV_LIBS})
 
